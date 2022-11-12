@@ -41,8 +41,20 @@ const Popup = () => {
   }
 `;
 
+const CREATE_COMMENT = gql`
+  mutation createComment(commentText: $createCommentInput!){
+    createComment(comment: commentText ){
+      _id
+      username
+      text
+      time
+    } 
+  }
+`;
+
 const {data} = useQuery(GET_COMMENTS, {variables: {location}});
 console.log(data);
+const [createComment, {data: data2}] = useMutation(CREATE_COMMENT)
 
   useEffect(() => {
     //setLoading(true);
@@ -51,7 +63,7 @@ console.log(data);
       console.log('url', url);
       setLocation(url);
       console.log('location:', location)
-      setReviews(data);
+      setReviews(data.getComments);
       // axios.get(`http://localhost:3000/graphql/${encodeURIComponent(url)}`)
       //   .then((res) => {
       //     const reviews = res.data;
@@ -119,22 +131,43 @@ console.log(data);
         }}>
         <Stack>
           <Stack direction="row" spacing={2}>
-            <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+            <Avatar alt="Remy Sharp" src="" />
             <p>Adam Lambert</p>
             
            </Stack>
-           {/* <p>Review score: {reviews.likes + reviews.dislikes}</p> */}
+           {/* <p>Review score: {reviews.isLiked}</p> */}
            <Stack direction="row" spacing={2}>
             <ThumbUpOffAltIcon color="success"/>
             <ThumbDownOffAltIcon color="error"/>
            </Stack>
 
-           {/* <LinearProgress color="success" value={reviews.likes}/> */}
+           {/* <LinearProgress color="success" value={reviews.isLiked}/> */}
         </Stack>   
         
         <Stack sx={{ mt: 4 }} spacing={'2rem'} maxHeight={'10rem'}>
           <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-            {loading ? reviews :
+            {loading ? reviews.map(review => {
+              return (
+              <>
+                <ListItem alignItems='flex-start' key={review._id}>
+                   <ListItemAvatar>
+                     <Avatar />
+                </ListItemAvatar>
+                <List>
+                <ListItemText
+                primary={`${review.username} - ${moment(review.time).format('HH:mm DD MMM')}`}
+                secondary={
+                <Typography
+                  sx={{ wordWrap: 'break-word' }}>{review.text}
+                  </Typography>
+                }
+              />
+              </List>
+                </ListItem>
+                <Divider/>
+              </>  
+              )
+            }) :
               <CircularProgress sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }} />}
           </List>
         </Stack>
