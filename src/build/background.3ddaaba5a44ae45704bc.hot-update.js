@@ -3,9 +3,9 @@ globalThis["webpackHotUpdatechrome_extension"]("background",{},
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ /* webpack/runtime/getFullHash */
 /******/ (() => {
-/******/ 	__webpack_require__.h = () => ("da15ce7e563cc7e972d4")
+/******/ 	__webpack_require__.h = () => ("8fc206d7adb85167394a")
 /******/ })();
 /******/ 
 /******/ }
 );
-//# sourceMappingURL=background.40ff27db43486b45dda1.hot-update.js.map
+//# sourceMappingURL=background.3ddaaba5a44ae45704bc.hot-update.js.map
