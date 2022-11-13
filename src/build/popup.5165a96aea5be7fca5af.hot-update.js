@@ -12,9 +12,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _mui_material___WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @mui/material/ */ "./node_modules/@mui/material/esm/Container/Container.js");
-/* harmony import */ var _mui_material___WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @mui/material/ */ "./node_modules/@mui/material/esm/Stack/Stack.js");
-/* harmony import */ var _mui_material___WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @mui/material/ */ "./node_modules/@mui/material/esm/Avatar/Avatar.js");
+/* harmony import */ var _mui_material___WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @mui/material/ */ "./node_modules/@mui/material/esm/Container/Container.js");
+/* harmony import */ var _mui_material___WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @mui/material/ */ "./node_modules/@mui/material/esm/Stack/Stack.js");
+/* harmony import */ var _mui_material___WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @mui/material/ */ "./node_modules/@mui/material/esm/Avatar/Avatar.js");
+/* harmony import */ var _mui_material___WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @mui/material/ */ "./node_modules/@mui/material/esm/Button/Button.js");
 /* harmony import */ var _mui_material___WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @mui/material/ */ "./node_modules/@mui/material/esm/List/List.js");
 /* harmony import */ var _mui_material___WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @mui/material/ */ "./node_modules/@mui/material/esm/ListItem/ListItem.js");
 /* harmony import */ var _mui_material___WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @mui/material/ */ "./node_modules/@mui/material/esm/ListItemAvatar/ListItemAvatar.js");
@@ -23,15 +24,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _mui_material___WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @mui/material/ */ "./node_modules/@mui/material/esm/Divider/Divider.js");
 /* harmony import */ var _mui_material___WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @mui/material/ */ "./node_modules/@mui/material/esm/CircularProgress/CircularProgress.js");
 /* harmony import */ var _mui_material___WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @mui/material/ */ "./node_modules/@mui/material/esm/TextField/TextField.js");
-/* harmony import */ var _mui_material___WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @mui/material/ */ "./node_modules/@mui/material/esm/Button/Button.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _mui_icons_material_ThumbUpOffAlt__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @mui/icons-material/ThumbUpOffAlt */ "./node_modules/@mui/icons-material/ThumbUpOffAlt.js");
 /* harmony import */ var _mui_icons_material_ThumbDownOffAlt__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @mui/icons-material/ThumbDownOffAlt */ "./node_modules/@mui/icons-material/ThumbDownOffAlt.js");
-/* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @apollo/client */ "./node_modules/graphql-tag/lib/index.js");
-/* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @apollo/client */ "./node_modules/@apollo/client/react/hooks/useMutation.js");
-/* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @apollo/client */ "./node_modules/@apollo/client/react/hooks/useQuery.js");
+/* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @apollo/client */ "./node_modules/graphql-tag/lib/index.js");
+/* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @apollo/client */ "./node_modules/@apollo/client/react/hooks/useMutation.js");
+/* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @apollo/client */ "./node_modules/@apollo/client/react/hooks/useQuery.js");
 /* module decorator */ module = __webpack_require__.hmd(module);
 (function () {
   var enterModule = typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal.enterModule : undefined;
@@ -47,23 +46,23 @@ var __signature__ = typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoader
 
 
 
-
 const Popup = () => {
   const [userInput, setUserInput] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
   const [error, setError] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
   const [loading, setLoading] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
-  const [reviews, setReviews] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
+  const [coments, setComents] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
   const [rerender, setRerender] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
   const [location, setLocation] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
-  const GET_COMMENTS = _apollo_client__WEBPACK_IMPORTED_MODULE_3__.gql`
+  const GET_COMMENTS = _apollo_client__WEBPACK_IMPORTED_MODULE_2__.gql`
   query getComments($location: String!) {
     getComments(location: $location) {
       username
       text
+      time
     }
   }
 `;
-  const CREATE_COMMENT = _apollo_client__WEBPACK_IMPORTED_MODULE_3__.gql`
+  const CREATE_COMMENT = _apollo_client__WEBPACK_IMPORTED_MODULE_2__.gql`
   mutation createComment($commentText: CreateCommentInput!){
     createComment(commentText: $commentText ){
       username
@@ -72,14 +71,42 @@ const Popup = () => {
     } 
   }
 `;
+  const GET_REVIEW = _apollo_client__WEBPACK_IMPORTED_MODULE_2__.gql`
+  query getReview ($location: String!) {
+    getReview(location: $location) {
+      username
+      isLiked
+      location
+    }
+  }
+`;
+  const CREATE_REVIEW = _apollo_client__WEBPACK_IMPORTED_MODULE_2__.gql`
+mutation createReview(createReviewInput: $createReviewInput!) {
+  createReview(reviewInput: $createReviewInput) {
+    username
+    isLiked
+    location
+  }
+}
+`;
   const [createComment, {
     data: data2
-  }] = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_4__.useMutation)(CREATE_COMMENT);
+  }] = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_3__.useMutation)(CREATE_COMMENT);
+  const [createReview, {
+    data: data3
+  }] = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_3__.useMutation)(CREATE_ReVIEW);
   const {
     data
-  } = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_5__.useQuery)(GET_COMMENTS, {
+  } = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_4__.useQuery)(GET_COMMENTS, {
     variables: {
-      location: "www.apolographql.com"
+      location
+    }
+  });
+  const {
+    data: review
+  } = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_4__.useQuery)(GET_COMMENTS, {
+    variables: {
+      location
     }
   });
   console.log('data', data);
@@ -93,27 +120,10 @@ const Popup = () => {
       console.log('url', url);
       setLocation(url);
       console.log('location:', location);
-      setReviews(data.getComments);
-      // axios.get(`http://localhost:3000/graphql/${encodeURIComponent(url)}`)
-      //   .then((res) => {
-      //     const reviews = res.data;
-      //     console.log('reviews', reviews)
-      //     const temp = [];
-      //     reviews.forEach(review => {
-      //       temp.push(<ListItem alignItems='flex-start' key={review._id}>
-      //         <ListItemAvatar>
-      //           <Avatar />
-      //         </ListItemAvatar>
-      //         <ListItemText
-      //           primary={`${review.username} - ${moment(review.time).format('HH:mm DD MMM')}`}
-      //           secondary={<Typography
-      //             sx={{ wordWrap: 'break-word' }}>{review.comment}</Typography>}
-      //         />
-      //       </ListItem>, <Divider />);
-      //     });
+      setComents(...data.getComments);
       //     temp.length > 0 ? setReviews(temp) : setReviews(<Typography sx={{ display: 'flex', alignContent: 'center' }}>No
       //       reviews!</Typography>);
-      //     //setLoading(false);
+      //setLoading(false);
       //   });
     });
   }, [location, data]);
@@ -155,8 +165,9 @@ const Popup = () => {
       }
     });
     setRerender(true);
+    setUserInput('');
   };
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_mui_material___WEBPACK_IMPORTED_MODULE_6__["default"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_mui_material___WEBPACK_IMPORTED_MODULE_5__["default"], {
     sx: {
       m: 2,
       display: 'flex',
@@ -166,20 +177,26 @@ const Popup = () => {
       minWidth: '20rem',
       height: '100%'
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_mui_material___WEBPACK_IMPORTED_MODULE_7__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_mui_material___WEBPACK_IMPORTED_MODULE_7__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_mui_material___WEBPACK_IMPORTED_MODULE_6__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_mui_material___WEBPACK_IMPORTED_MODULE_6__["default"], {
+    direction: "row",
+    spacing: 2
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_mui_material___WEBPACK_IMPORTED_MODULE_7__["default"], {
+    alt: "Remy Sharp",
+    src: ""
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Adam Lambert")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_mui_material___WEBPACK_IMPORTED_MODULE_6__["default"], {
     direction: "row",
     spacing: 2
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_mui_material___WEBPACK_IMPORTED_MODULE_8__["default"], {
-    alt: "Remy Sharp",
-    src: ""
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Adam Lambert")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_mui_material___WEBPACK_IMPORTED_MODULE_7__["default"], {
-    direction: "row",
-    spacing: 2
+    onClick: () => createReview({
+      username: "",
+      isLiked: true,
+      location
+    })
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_mui_icons_material_ThumbUpOffAlt__WEBPACK_IMPORTED_MODULE_9__["default"], {
     color: "success"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_mui_icons_material_ThumbDownOffAlt__WEBPACK_IMPORTED_MODULE_10__["default"], {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_mui_icons_material_ThumbDownOffAlt__WEBPACK_IMPORTED_MODULE_10__["default"], {
     color: "error"
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_mui_material___WEBPACK_IMPORTED_MODULE_7__["default"], {
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_mui_material___WEBPACK_IMPORTED_MODULE_6__["default"], {
     sx: {
       mt: 4
     },
@@ -191,17 +208,17 @@ const Popup = () => {
       maxWidth: 360,
       bgcolor: 'background.paper'
     }
-  }, loading ? reviews.map(review => {
+  }, loading ? coments.map(coment => {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_mui_material___WEBPACK_IMPORTED_MODULE_12__["default"], {
       alignItems: "flex-start",
-      key: review._id
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_mui_material___WEBPACK_IMPORTED_MODULE_13__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_mui_material___WEBPACK_IMPORTED_MODULE_8__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_mui_material___WEBPACK_IMPORTED_MODULE_11__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_mui_material___WEBPACK_IMPORTED_MODULE_14__["default"], {
-      primary: `${review.username} - ${moment__WEBPACK_IMPORTED_MODULE_2___default()(review.time).format('HH:mm DD MMM')}`,
+      key: coment._id
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_mui_material___WEBPACK_IMPORTED_MODULE_13__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_mui_material___WEBPACK_IMPORTED_MODULE_7__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_mui_material___WEBPACK_IMPORTED_MODULE_11__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_mui_material___WEBPACK_IMPORTED_MODULE_14__["default"], {
+      primary: `${coment.username} - ${moment__WEBPACK_IMPORTED_MODULE_1___default()(coment.time).format('HH:mm DD MMM')}`,
       secondary: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_mui_material___WEBPACK_IMPORTED_MODULE_15__["default"], {
         sx: {
           wordWrap: 'break-word'
         }
-      }, review.text)
+      }, coment.text)
     }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_mui_material___WEBPACK_IMPORTED_MODULE_16__["default"], null));
   }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_mui_material___WEBPACK_IMPORTED_MODULE_17__["default"], {
     sx: {
@@ -220,7 +237,7 @@ const Popup = () => {
     },
     fullWidth: true,
     autoComplete: "off"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_mui_material___WEBPACK_IMPORTED_MODULE_19__["default"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_mui_material___WEBPACK_IMPORTED_MODULE_8__["default"], {
     variant: "contained",
     sx: {
       mt: 1
@@ -230,7 +247,7 @@ const Popup = () => {
     color: "inherit"
   }, "Send"));
 };
-__signature__(Popup, "useState{[userInput, setUserInput]('')}\nuseState{[error, setError](false)}\nuseState{[loading, setLoading](false)}\nuseState{[reviews, setReviews]([])}\nuseState{[rerender, setRerender](false)}\nuseState{[location, setLocation]('')}\nuseMutation{[createComment, {data: data2}]}\nuseQuery{{data}}\nuseEffect{}", () => [_apollo_client__WEBPACK_IMPORTED_MODULE_4__.useMutation, _apollo_client__WEBPACK_IMPORTED_MODULE_5__.useQuery]);
+__signature__(Popup, "useState{[userInput, setUserInput]('')}\nuseState{[error, setError](false)}\nuseState{[loading, setLoading](false)}\nuseState{[coments, setComents]([])}\nuseState{[rerender, setRerender](false)}\nuseState{[location, setLocation]('')}\nuseMutation{[createComment, {data: data2}]}\nuseMutation{[createReview, {data: data3}]}\nuseQuery{{data}}\nuseQuery{{data: review}}\nuseEffect{}", () => [_apollo_client__WEBPACK_IMPORTED_MODULE_3__.useMutation, _apollo_client__WEBPACK_IMPORTED_MODULE_3__.useMutation, _apollo_client__WEBPACK_IMPORTED_MODULE_4__.useQuery, _apollo_client__WEBPACK_IMPORTED_MODULE_4__.useQuery]);
 const _default = Popup;
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_default);
 ;
@@ -254,9 +271,9 @@ const _default = Popup;
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ /* webpack/runtime/getFullHash */
 /******/ (() => {
-/******/ 	__webpack_require__.h = () => ("c8a4596fc76e967d9018")
+/******/ 	__webpack_require__.h = () => ("147fd2d89f9e995532d0")
 /******/ })();
 /******/ 
 /******/ }
 );
-//# sourceMappingURL=popup.bc2c3c6bc0ba6e60a6a0.hot-update.js.map
+//# sourceMappingURL=popup.5165a96aea5be7fca5af.hot-update.js.map

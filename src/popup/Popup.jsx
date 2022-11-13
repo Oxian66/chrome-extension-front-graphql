@@ -14,9 +14,8 @@ import {
   ListItemAvatar,
   Divider,
   LinearProgress,
-  FormControl,
+  
 } from '@mui/material/';
-import axios from 'axios';
 import moment from 'moment';
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
@@ -26,7 +25,7 @@ const Popup = () => {
   const [userInput, setUserInput] = useState('');
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [reviews, setReviews] = useState([]);
+  const [coments, setComents] = useState([]);
   const [rerender, setRerender] = useState(false);
   const [location, setLocation] = useState('');
 
@@ -35,6 +34,7 @@ const Popup = () => {
     getComments(location: $location) {
       username
       text
+      time
     }
   }
 `;
@@ -49,10 +49,32 @@ const CREATE_COMMENT = gql`
   }
 `;
 
+const GET_REVIEW = gql`
+  query getReview ($location: String!) {
+    getReview(location: $location) {
+      username
+      isLiked
+      location
+    }
+  }
+`;
+
+const CREATE_REVIEW = gql`
+mutation createReview(createReviewInput: $createReviewInput!) {
+  createReview(reviewInput: $createReviewInput) {
+    username
+    isLiked
+    location
+  }
+}
+`;
+
 
 const [createComment, {data: data2}] = useMutation(CREATE_COMMENT);
+const [createReview, {data: data3}] = useMutation(CREATE_ReVIEW);
 
-const {data} = useQuery(GET_COMMENTS, {variables: {location: "www.apolographql.com"}},);
+const {data} = useQuery(GET_COMMENTS, {variables: {location}},);
+const {data: review} = useQuery(GET_COMMENTS, {variables: {location}},);
 console.log('data', data);
 
   useEffect(() => {
@@ -62,27 +84,10 @@ console.log('data', data);
       console.log('url', url);
       setLocation(url);
       console.log('location:', location)
-      setReviews(data.getComments);
-      // axios.get(`http://localhost:3000/graphql/${encodeURIComponent(url)}`)
-      //   .then((res) => {
-      //     const reviews = res.data;
-      //     console.log('reviews', reviews)
-      //     const temp = [];
-      //     reviews.forEach(review => {
-      //       temp.push(<ListItem alignItems='flex-start' key={review._id}>
-      //         <ListItemAvatar>
-      //           <Avatar />
-      //         </ListItemAvatar>
-      //         <ListItemText
-      //           primary={`${review.username} - ${moment(review.time).format('HH:mm DD MMM')}`}
-      //           secondary={<Typography
-      //             sx={{ wordWrap: 'break-word' }}>{review.comment}</Typography>}
-      //         />
-      //       </ListItem>, <Divider />);
-      //     });
+      setComents(...data.getComments);
       //     temp.length > 0 ? setReviews(temp) : setReviews(<Typography sx={{ display: 'flex', alignContent: 'center' }}>No
       //       reviews!</Typography>);
-      //     //setLoading(false);
+      //setLoading(false);
       //   });
       
     });
@@ -123,7 +128,8 @@ console.log('data', data);
       username: 'choenix',
       text: userInput,
     }}});
-    setRerender(true)
+    setRerender(true);
+    setUserInput('');
   };
 
 
@@ -145,7 +151,10 @@ console.log('data', data);
            </Stack>
            {/* <p>Review score: {reviews.isLiked}</p> */}
            <Stack direction="row" spacing={2}>
-            <ThumbUpOffAltIcon color="success"/>
+            <Button onClick={() => createReview({username: "", isLiked: true, location})}>
+               <ThumbUpOffAltIcon color="success"/>
+            </Button>
+            
             <ThumbDownOffAltIcon color="error"/>
            </Stack>
 
@@ -154,19 +163,19 @@ console.log('data', data);
         
         <Stack sx={{ mt: 4 }} spacing={'2rem'} maxHeight={'10rem'}>
           <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-            {loading ? reviews.map(review => {
+            {loading ? coments.map(coment => {
               return (
               <>
-                <ListItem alignItems='flex-start' key={review._id}>
+                <ListItem alignItems='flex-start' key={coment._id}>
                    <ListItemAvatar>
                      <Avatar />
                 </ListItemAvatar>
                 <List>
                 <ListItemText
-                primary={`${review.username} - ${moment(review.time).format('HH:mm DD MMM')}`}
+                primary={`${coment.username} - ${moment(coment.time).format('HH:mm DD MMM')}`}
                 secondary={
                 <Typography
-                  sx={{ wordWrap: 'break-word' }}>{review.text}
+                  sx={{ wordWrap: 'break-word' }}>{coment.text}
                   </Typography>
                 }
               />
