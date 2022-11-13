@@ -80610,6 +80610,90 @@ if (false) {} else {
 
 /***/ }),
 
+/***/ "./src/popup/Login.jsx":
+/*!*****************************!*\
+  !*** ./src/popup/Login.jsx ***!
+  \*****************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _mui_material___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @mui/material/ */ "./node_modules/@mui/material/esm/Container/Container.js");
+/* harmony import */ var _mui_material___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @mui/material/ */ "./node_modules/@mui/material/esm/Stack/Stack.js");
+/* harmony import */ var _mui_material___WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @mui/material/ */ "./node_modules/@mui/material/esm/Button/Button.js");
+/* module decorator */ module = __webpack_require__.hmd(module);
+(function () {
+  var enterModule = typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal.enterModule : undefined;
+  enterModule && enterModule(module);
+})();
+var __signature__ = typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal.default.signature : function (a) {
+  return a;
+};
+
+
+
+const Login = () => {
+  const [userInput, setUserInput] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
+  const handleUserInput = e => {
+    setUserInput(e.target.value);
+  };
+
+  //const navigate= useNavigate();
+
+  const login = () => {
+    // navigate('/Popup.tsx');
+  };
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_mui_material___WEBPACK_IMPORTED_MODULE_1__["default"], {
+    sx: {
+      m: 2,
+      display: 'flex',
+      justifyContent: 'spaceBetween',
+      flexWrap: 'wrap',
+      width: '100%',
+      minWidth: '20rem',
+      height: '100%'
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_mui_material___WEBPACK_IMPORTED_MODULE_2__["default"], {
+    sx: {
+      mt: 4
+    },
+    spacing: '2rem',
+    maxHeight: '10rem'
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_mui_material___WEBPACK_IMPORTED_MODULE_3__["default"], {
+    variant: "contained",
+    sx: {
+      mt: 1
+    },
+    onClick: login,
+    size: "small",
+    color: "inherit",
+    onSubmit: login
+  }, "Log in with Google")));
+};
+__signature__(Login, "useState{[userInput, setUserInput]('')}");
+const _default = Login;
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_default);
+;
+(function () {
+  var reactHotLoader = typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal.default : undefined;
+  if (!reactHotLoader) {
+    return;
+  }
+  reactHotLoader.register(Login, "Login", "D:\\works\\Chrome-extension-with-react-and-graphql\\src\\popup\\Login.jsx");
+  reactHotLoader.register(_default, "default", "D:\\works\\Chrome-extension-with-react-and-graphql\\src\\popup\\Login.jsx");
+})();
+;
+(function () {
+  var leaveModule = typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal.leaveModule : undefined;
+  leaveModule && leaveModule(module);
+})();
+
+/***/ }),
+
 /***/ "./src/popup/Popup.jsx":
 /*!*****************************!*\
   !*** ./src/popup/Popup.jsx ***!
@@ -80640,8 +80724,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _mui_icons_material_ThumbUpOffAlt__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @mui/icons-material/ThumbUpOffAlt */ "./node_modules/@mui/icons-material/ThumbUpOffAlt.js");
 /* harmony import */ var _mui_icons_material_ThumbDownOffAlt__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @mui/icons-material/ThumbDownOffAlt */ "./node_modules/@mui/icons-material/ThumbDownOffAlt.js");
 /* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @apollo/client */ "./node_modules/graphql-tag/lib/index.js");
-/* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @apollo/client */ "./node_modules/@apollo/client/react/hooks/useQuery.js");
-/* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @apollo/client */ "./node_modules/@apollo/client/react/hooks/useMutation.js");
+/* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @apollo/client */ "./node_modules/@apollo/client/react/hooks/useMutation.js");
+/* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @apollo/client */ "./node_modules/@apollo/client/react/hooks/useQuery.js");
 /* module decorator */ module = __webpack_require__.hmd(module);
 (function () {
   var enterModule = typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal.enterModule : undefined;
@@ -80666,41 +80750,38 @@ const Popup = () => {
   const [rerender, setRerender] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
   const [location, setLocation] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
   const GET_COMMENTS = _apollo_client__WEBPACK_IMPORTED_MODULE_3__.gql`
-  query getComments($url: String!) {
-    getComments(location: $url) {
-      _id
+  query getComments($location: String!) {
+    getComments(location: $location) {
       username
       text
-      reviews
     }
   }
 `;
   const CREATE_COMMENT = _apollo_client__WEBPACK_IMPORTED_MODULE_3__.gql`
-  mutation createComment(commentText: $createCommentInput!){
-    createComment(comment: commentText ){
-      _id
+  mutation createComment($commentText: CreateCommentInput!){
+    createComment(commentText: $commentText ){
       username
       text
       time
     } 
   }
 `;
-  const {
-    data
-  } = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_4__.useQuery)(GET_COMMENTS, {
-    variables: {
-      location
-    }
-  });
-  console.log(data);
   const [createComment, {
     data: data2
-  }] = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_5__.useMutation)(CREATE_COMMENT);
+  }] = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_4__.useMutation)(CREATE_COMMENT);
+  const {
+    data
+  } = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_5__.useQuery)(GET_COMMENTS, {
+    variables: {
+      location: "www.apolographql.com"
+    }
+  });
+  console.log('data', data);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     //setLoading(true);
     chrome.tabs.query({
       active: true,
-      lastFocusedWindow: true
+      currentWindow: true
     }, tabs => {
       const url = tabs[0].url.split('/')[2];
       console.log('url', url);
@@ -80732,6 +80813,7 @@ const Popup = () => {
   }, [location, data]);
   const handleUserInput = e => {
     setUserInput(e.target.value);
+    console.log(e.target.value);
   };
   const submit = async () => {
     //setLoading(true);
@@ -80755,6 +80837,18 @@ const Popup = () => {
     //     setLoading(false);
     //   });
     //});
+    createComment({
+      variables: {
+        commentText: {
+          time: new Date().toISOString(),
+          location,
+          isLiked: true,
+          username: 'choenix',
+          text: userInput
+        }
+      }
+    });
+    setRerender(true);
   };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_mui_material___WEBPACK_IMPORTED_MODULE_6__["default"], {
     sx: {
@@ -80830,7 +80924,7 @@ const Popup = () => {
     color: "inherit"
   }, "Send"));
 };
-__signature__(Popup, "useState{[userInput, setUserInput]('')}\nuseState{[error, setError](false)}\nuseState{[loading, setLoading](false)}\nuseState{[reviews, setReviews]([])}\nuseState{[rerender, setRerender](false)}\nuseState{[location, setLocation]('')}\nuseQuery{{data}}\nuseMutation{[createComment, {data: data2}]}\nuseEffect{}", () => [_apollo_client__WEBPACK_IMPORTED_MODULE_4__.useQuery, _apollo_client__WEBPACK_IMPORTED_MODULE_5__.useMutation]);
+__signature__(Popup, "useState{[userInput, setUserInput]('')}\nuseState{[error, setError](false)}\nuseState{[loading, setLoading](false)}\nuseState{[reviews, setReviews]([])}\nuseState{[rerender, setRerender](false)}\nuseState{[location, setLocation]('')}\nuseMutation{[createComment, {data: data2}]}\nuseQuery{{data}}\nuseEffect{}", () => [_apollo_client__WEBPACK_IMPORTED_MODULE_4__.useMutation, _apollo_client__WEBPACK_IMPORTED_MODULE_5__.useQuery]);
 const _default = Popup;
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_default);
 ;
@@ -80861,9 +80955,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/@hot-loader/react-dom/index.js");
 /* harmony import */ var _Popup__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Popup */ "./src/popup/Popup.jsx");
-/* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @apollo/client */ "./node_modules/@apollo/client/core/ApolloClient.js");
-/* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @apollo/client */ "./node_modules/@apollo/client/cache/inmemory/inMemoryCache.js");
-/* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @apollo/client */ "./node_modules/@apollo/client/react/context/ApolloProvider.js");
+/* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @apollo/client */ "./node_modules/@apollo/client/link/http/HttpLink.js");
+/* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @apollo/client */ "./node_modules/@apollo/client/core/ApolloClient.js");
+/* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @apollo/client */ "./node_modules/@apollo/client/cache/inmemory/inMemoryCache.js");
+/* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @apollo/client */ "./node_modules/@apollo/client/link/core/from.js");
+/* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @apollo/client */ "./node_modules/@apollo/client/react/context/ApolloProvider.js");
+/* harmony import */ var _Login__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Login */ "./src/popup/Login.jsx");
+/* harmony import */ var _apollo_client_link_error__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @apollo/client/link/error */ "./node_modules/@apollo/client/link/error/index.js");
 /* module decorator */ module = __webpack_require__.hmd(module);
 (function () {
   var enterModule = typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal.enterModule : undefined;
@@ -80876,15 +80974,33 @@ var __signature__ = typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoader
 
 
 
-const client = new _apollo_client__WEBPACK_IMPORTED_MODULE_3__.ApolloClient({
-  uri: 'http://localhost:3000/graphql',
-  cache: new _apollo_client__WEBPACK_IMPORTED_MODULE_4__.InMemoryCache(),
+
+
+
+const errorLink = (0,_apollo_client_link_error__WEBPACK_IMPORTED_MODULE_4__.onError)(({
+  graphQLErrors,
+  networkError
+}) => {
+  if (graphQLErrors) graphQLErrors.forEach(({
+    message,
+    locations,
+    path
+  }) => console.log(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`));
+  if (networkError) console.log(`[Network error]: ${networkError}`);
+});
+const httpLink = new _apollo_client__WEBPACK_IMPORTED_MODULE_5__.HttpLink({
+  uri: 'http://localhost:3001/graphql'
+});
+const client = new _apollo_client__WEBPACK_IMPORTED_MODULE_6__.ApolloClient({
+  uri: 'http://localhost:3001/graphql',
+  cache: new _apollo_client__WEBPACK_IMPORTED_MODULE_7__.InMemoryCache(),
   // fetchOptions: {
   //     mode: 'no-cors',
   //   },
-  connectToDevTools: true
+  connectToDevTools: true,
+  link: (0,_apollo_client__WEBPACK_IMPORTED_MODULE_8__.from)([errorLink, httpLink])
 });
-(0,react_dom__WEBPACK_IMPORTED_MODULE_1__.render)( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_apollo_client__WEBPACK_IMPORTED_MODULE_5__.ApolloProvider, {
+(0,react_dom__WEBPACK_IMPORTED_MODULE_1__.render)( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_apollo_client__WEBPACK_IMPORTED_MODULE_9__.ApolloProvider, {
   client: client
 }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Popup__WEBPACK_IMPORTED_MODULE_2__["default"], null)), window.document.querySelector('#app-container'));
 
@@ -80895,6 +81011,8 @@ const client = new _apollo_client__WEBPACK_IMPORTED_MODULE_3__.ApolloClient({
   if (!reactHotLoader) {
     return;
   }
+  reactHotLoader.register(errorLink, "errorLink", "D:\\works\\Chrome-extension-with-react-and-graphql\\src\\popup\\index.jsx");
+  reactHotLoader.register(httpLink, "httpLink", "D:\\works\\Chrome-extension-with-react-and-graphql\\src\\popup\\index.jsx");
   reactHotLoader.register(client, "client", "D:\\works\\Chrome-extension-with-react-and-graphql\\src\\popup\\index.jsx");
 })();
 ;
@@ -88576,6 +88694,125 @@ __webpack_require__.r(__webpack_exports__);
 
 var execute = _ApolloLink_js__WEBPACK_IMPORTED_MODULE_0__.ApolloLink.execute;
 //# sourceMappingURL=execute.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@apollo/client/link/core/from.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/@apollo/client/link/core/from.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "from": () => (/* binding */ from)
+/* harmony export */ });
+/* harmony import */ var _ApolloLink_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ApolloLink.js */ "./node_modules/@apollo/client/link/core/ApolloLink.js");
+
+var from = _ApolloLink_js__WEBPACK_IMPORTED_MODULE_0__.ApolloLink.from;
+//# sourceMappingURL=from.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@apollo/client/link/error/index.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/@apollo/client/link/error/index.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ErrorLink": () => (/* binding */ ErrorLink),
+/* harmony export */   "onError": () => (/* binding */ onError)
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _utilities_index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utilities/index.js */ "./node_modules/zen-observable-ts/module.js");
+/* harmony import */ var _core_index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/index.js */ "./node_modules/@apollo/client/link/core/ApolloLink.js");
+
+
+
+function onError(errorHandler) {
+    return new _core_index_js__WEBPACK_IMPORTED_MODULE_0__.ApolloLink(function (operation, forward) {
+        return new _utilities_index_js__WEBPACK_IMPORTED_MODULE_1__.Observable(function (observer) {
+            var sub;
+            var retriedSub;
+            var retriedResult;
+            try {
+                sub = forward(operation).subscribe({
+                    next: function (result) {
+                        if (result.errors) {
+                            retriedResult = errorHandler({
+                                graphQLErrors: result.errors,
+                                response: result,
+                                operation: operation,
+                                forward: forward,
+                            });
+                            if (retriedResult) {
+                                retriedSub = retriedResult.subscribe({
+                                    next: observer.next.bind(observer),
+                                    error: observer.error.bind(observer),
+                                    complete: observer.complete.bind(observer),
+                                });
+                                return;
+                            }
+                        }
+                        observer.next(result);
+                    },
+                    error: function (networkError) {
+                        retriedResult = errorHandler({
+                            operation: operation,
+                            networkError: networkError,
+                            graphQLErrors: networkError &&
+                                networkError.result &&
+                                networkError.result.errors,
+                            forward: forward,
+                        });
+                        if (retriedResult) {
+                            retriedSub = retriedResult.subscribe({
+                                next: observer.next.bind(observer),
+                                error: observer.error.bind(observer),
+                                complete: observer.complete.bind(observer),
+                            });
+                            return;
+                        }
+                        observer.error(networkError);
+                    },
+                    complete: function () {
+                        if (!retriedResult) {
+                            observer.complete.bind(observer)();
+                        }
+                    },
+                });
+            }
+            catch (e) {
+                errorHandler({ networkError: e, operation: operation, forward: forward });
+                observer.error(e);
+            }
+            return function () {
+                if (sub)
+                    sub.unsubscribe();
+                if (retriedSub)
+                    sub.unsubscribe();
+            };
+        });
+    });
+}
+var ErrorLink = (function (_super) {
+    (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__extends)(ErrorLink, _super);
+    function ErrorLink(errorHandler) {
+        var _this = _super.call(this) || this;
+        _this.link = onError(errorHandler);
+        return _this;
+    }
+    ErrorLink.prototype.request = function (operation, forward) {
+        return this.link.request(operation, forward);
+    };
+    return ErrorLink;
+}(_core_index_js__WEBPACK_IMPORTED_MODULE_0__.ApolloLink));
+
+//# sourceMappingURL=index.js.map
 
 /***/ }),
 
@@ -102673,7 +102910,7 @@ if (hasSymbols()) {
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	(() => {
-/******/ 		__webpack_require__.h = () => ("3845347b68e1b049c4a5")
+/******/ 		__webpack_require__.h = () => ("c8a4596fc76e967d9018")
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/global */

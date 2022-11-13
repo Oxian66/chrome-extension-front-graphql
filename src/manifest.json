@@ -2,8 +2,14 @@
   "manifest_version": 3,
   "name": "Chrome Extension with React & Webpack",
   "permissions": [
-    "tabs"
+    "tabs", "identity"
   ],
+  "oauth2": {
+    "client_id": "216772796853-q7hu21d0jg8jr491sog26p4gor14su9c.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/cloud-platform"
+    ]
+  },
   "description": "A chrome extension boilerplate built with React 17, Webpack 5, and Webpack Dev Server 4",
   "background": { "service_worker": "background.bundle.js" },
   "action": {

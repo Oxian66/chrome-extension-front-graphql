@@ -31,20 +31,17 @@ const Popup = () => {
   const [location, setLocation] = useState('');
 
   const GET_COMMENTS = gql`
-  query getComments($url: String!) {
-    getComments(location: $url) {
-      _id
+  query getComments($location: String!) {
+    getComments(location: $location) {
       username
       text
-      reviews
     }
   }
 `;
 
 const CREATE_COMMENT = gql`
-  mutation createComment(commentText: $createCommentInput!){
-    createComment(comment: commentText ){
-      _id
+  mutation createComment($commentText: CreateCommentInput!){
+    createComment(commentText: $commentText ){
       username
       text
       time
@@ -52,13 +49,15 @@ const CREATE_COMMENT = gql`
   }
 `;
 
-const {data} = useQuery(GET_COMMENTS, {variables: {location}});
-console.log(data);
-const [createComment, {data: data2}] = useMutation(CREATE_COMMENT)
+
+const [createComment, {data: data2}] = useMutation(CREATE_COMMENT);
+
+const {data} = useQuery(GET_COMMENTS, {variables: {location: "www.apolographql.com"}},);
+console.log('data', data);
 
   useEffect(() => {
     //setLoading(true);
-    chrome.tabs.query({ active: true, lastFocusedWindow: true }, tabs => {
+    chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
       const url = (tabs[0].url.split('/')[2]);
       console.log('url', url);
       setLocation(url);
@@ -92,6 +91,7 @@ const [createComment, {data: data2}] = useMutation(CREATE_COMMENT)
 
   const handleUserInput = (e) => {
     setUserInput(e.target.value);
+    console.log(e.target.value);
   };
 
   const submit = async () => {
@@ -116,6 +116,14 @@ const [createComment, {data: data2}] = useMutation(CREATE_COMMENT)
       //     setLoading(false);
       //   });
     //});
+    createComment({variables: {commentText: {
+      time: new Date().toISOString(),
+      location,
+      isLiked: true,
+      username: 'choenix',
+      text: userInput,
+    }}});
+    setRerender(true)
   };
 
 
